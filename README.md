@@ -24,4 +24,4 @@ command line with the `-h` or `--help` flag, which will print the options
 
 The python scripts can be run with the following options
 - `python python/CalculatePi.py -Nsample [# samples]`
-- `python python/GaussRandom.pu -Nsample [# samples] -range [Xmax] --log --expo`
+- `python python/GaussRandom.py -Nsample [# samples] -range [Xmax] --log --expo`
