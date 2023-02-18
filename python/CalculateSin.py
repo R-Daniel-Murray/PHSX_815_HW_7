@@ -92,7 +92,7 @@ if __name__ == "__main__":
 	fig2.savefig("SinQuadPy.pdf")
 	
 	
-print(calcSin)
+# print(calcSin)
 
 
 
