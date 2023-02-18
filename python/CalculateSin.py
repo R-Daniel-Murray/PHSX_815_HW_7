@@ -1,9 +1,10 @@
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
+import math
 
 sys.path.append(".")
-from python.Random import Random
+from Random import Random
 
 if __name__ == "__main__":
 
@@ -33,7 +34,7 @@ if __name__ == "__main__":
 	# sample number
 	isample = []
 	# calculated values of Pi (per sample)
-	calcPi = []
+	calcSin = []
 
 	random = Random()
 
@@ -43,7 +44,7 @@ if __name__ == "__main__":
 		Y = random.rand()
 
 		nTotal += 1
-		if(X*X + Y*Y <= 1): #accept if inside
+		if( Y <= math.sin(X*math.pi)): #accept if inside
 			nAccept += 1
 			if(i % idraw == 0):
 				Xaccept.append(X)
@@ -54,22 +55,21 @@ if __name__ == "__main__":
 				Yreject.append(Y)
 		if(i % idraw == 0):
 			isample.append(nTotal)
-			calcPi.append(4*nAccept/nTotal)
-
-
-
+			calcSin.append(nAccept/nTotal)
+		
+	
 	#plot calculated pi vs sample number
 	fig1 = plt.figure()
-	plt.plot(isample,calcPi)
-	plt.ylabel(r'Approximate $\pi$')
+	plt.plot(isample,calcSin)
+	plt.ylabel(r'Approximate Integral')
 	plt.xlabel("Sample number")
 	plt.xlim(0,isample[len(isample)-1])
 	ax = plt.gca()
-	ax.axhline(y=np.arccos(-1),color='green',label=r'true $\pi$')
-	plt.title(r'Approximation of $\pi$ as a function of number of samples')
+	ax.axhline(0.6366,color='green',label=r'True Integral')
+	plt.title(r'Approximation of the integral as a function of number of samples')
 	plt.legend()
 
-	fig1.savefig("calculatedPiPy.pdf")
+	fig1.savefig("calculatedSin.pdf")
 
 
 	#plot accept/reject points
@@ -81,18 +81,18 @@ if __name__ == "__main__":
 	plt.legend()
 
 
+	# x_circle = np.arange(min(min(Xaccept),min(Xreject)),max(max(Xaccept),max(Xreject)),0.001)
+	# y_circle = [np.sqrt(i*i) for i in x_circle]
+
 	x_circle = np.arange(min(min(Xaccept),min(Xreject)),max(max(Xaccept),max(Xreject)),0.001)
-	y_circle = [np.sqrt(1-i*i) for i in x_circle]
-	plt.plot(x_circle,y_circle,color='blue',label=r'$x^2 + y^2 = 1$')
+	y_circle = [(math.sin(i*math.pi)) for i in x_circle]
+	plt.plot(x_circle,y_circle,color='blue',label=r'$y = sin(pi*x)$')
 	plt.legend()
 	plt.title('Sampled points')
-	fig2.savefig("circleQuadPy.pdf")
-
-
-
-
-
-
+	fig2.savefig("SinQuadPy.pdf")
+	
+	
+# print(calcSin)
 
 
 

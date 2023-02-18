@@ -2,18 +2,11 @@
 
 ## Rejection Sampling
 
-This repository contains several types of programs:
-
-- `CalculatePi.x` [C++] 
-- `GaussRandom.x` [C++]
-
-and corresponding python versions in `python` directory
+This program calculates the integral of sin(pi*X) function from  X = 0 to X = 1
 
 ### Requirements
 
-In order to compile (by typing `make`) and run the C++ examples, you
-need the ROOT package installed (for visualization):
-- [ROOT](https://root.cern/) (C++)
+
 
 The python scripts require the following libraries: `numpy` and `matplotlib`
 

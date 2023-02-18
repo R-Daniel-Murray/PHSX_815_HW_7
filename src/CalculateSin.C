@@ -152,7 +152,7 @@ int main(int argc, char* argv[]){
   line->DrawLine(isample[0], acos(-1), isample[isample.size()-1], acos(-1));
   gr_pi->Draw("CP same");
 
-  can0->SaveAs("CalculatedPi.pdf");
+  can0->SaveAs("CalculatedPiperep.pdf");
 
   // plot accept/reject points
   TGraph* gr_accept = new TGraph(int(Xaccept.size()), &Xaccept[0], &Yaccept[0]);
