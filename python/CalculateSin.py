@@ -9,7 +9,7 @@ from Random import Random
 if __name__ == "__main__":
 
 	#set default number of samples
-	Nsample = 1000
+	Nsample = 100
 
 	# read the user-provided seed from the command line (if there)
 	if '-Nsample' in sys.argv:
@@ -36,12 +36,17 @@ if __name__ == "__main__":
 	# calculated values of Pi (per sample)
 	calcSin = []
 
+	Yhist = []
+
 	random = Random()
 
 	idraw = max(1,int(Nsample)/100000)
 	for i in range(0,Nsample):
 		X = random.rand()
-		Y = random.rand()
+		Y = 2.0
+		while Y >1.0:
+			Y = random.Exponential(5)
+
 
 		nTotal += 1
 		if( Y <= math.sin(X*math.pi)): #accept if inside
@@ -55,7 +60,9 @@ if __name__ == "__main__":
 				Yreject.append(Y)
 		if(i % idraw == 0):
 			isample.append(nTotal)
-			calcSin.append(nAccept/nTotal)
+			calcSin.append((nAccept/nTotal))
+			###multiply nAccept/nTotal by the mass of the box, which is,
+			
 		
 	
 	#plot calculated pi vs sample number
@@ -91,6 +98,9 @@ if __name__ == "__main__":
 	plt.title('Sampled points')
 	fig2.savefig("SinQuadPy.pdf")
 	
+	fig3 = plt.figure()
+	plt.hist((Yaccept+Yreject))
+	fig3.savefig('Ydistr.pdf')
 	
 # print(calcSin)
 

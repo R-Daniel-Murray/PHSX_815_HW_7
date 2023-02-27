@@ -4,6 +4,7 @@
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 #################
 # Random class
@@ -42,6 +43,32 @@ class Random:
     # function returns a random floating point number between (0, 1) (uniform)
     def rand(self):
         return 5.42101086242752217E-20 * self.int64()
+        # function returns a random integer (0 or 1) according to a Bernoulli distr.
+    def Bernoulli(self, p=0.5):
+        if p < 0. or p > 1.:
+            return 1
+        
+        R = self.rand()
+
+        if R < p:
+            return 1
+        else:
+            return 0
+
+    # function returns a random double (0 to infty) according to an exponential distribution
+    def Exponential(self, beta=1.):
+      # make sure beta is consistent with an exponential
+      if beta <= 0.:
+        beta = 1.
+
+      R = self.rand();
+
+      while R <= 0.:
+        R = self.rand()
+
+      X = -math.log(R)/beta
+
+      return X
 
 # main function for this Python code
 if __name__ == "__main__":
@@ -74,7 +101,7 @@ if __name__ == "__main__":
     # an array of random numbers using our Random class
     myx = []
     for i in range(0,N):
-        myx.append(random.rand())
+        myx.append(random.Exponential())
 
     # create histogram of our data
     n, bins, patches = plt.hist(myx, 50, density=True, facecolor='g', alpha=0.75)
@@ -86,4 +113,7 @@ if __name__ == "__main__":
     plt.grid(True)
 
     # show figure (program only ends once closed
-    plt.show()
+    plt.savefig('random.pdf')
+    # plt.show()
+
+    
